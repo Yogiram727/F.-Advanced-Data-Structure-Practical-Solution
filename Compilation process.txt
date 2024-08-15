@@ -1,0 +1,3 @@
+Compilation: Translates your code into object code with references to library functions/objects.Genrates .obj or .o file.
+Linking: Resolves these references by connecting them to the actual implementations in the standard libraries, either by copying (static linking) or referencing (dynamic linking) the required code. generates .exe file.
+Executable: The final executable file contains your code and the linked library code, ready to be run.

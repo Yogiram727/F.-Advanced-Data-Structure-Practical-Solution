@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 struct Node
 {
     int data;
@@ -11,8 +10,7 @@ struct Node *head = NULL;
 
 void insertAtBeginning(int new_data)
 {
-    // struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *new_node = new Node;
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
     new_node->data = new_data;
     new_node->next = head;
     head = new_node;
@@ -20,8 +18,7 @@ void insertAtBeginning(int new_data)
 
 void insertAtEnd(int new_data)
 {
-    // struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *new_node = new Node;
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
     new_node->data = new_data;
     new_node->next = NULL;
     if (head == NULL)
@@ -52,13 +49,12 @@ void display()
 
 int main()
 {
-    int new_value;
-    for (int i = 0; i < 5; i++)
-    {
-        cin >> new_value;
-        // insertAtBeginning(new_value);
-        insertAtEnd(new_value);
-    }
+    // insertAtEnd(2);
+    // insertAtEnd(3);
+    // insertAtEnd(4);
+    insertAtBeginning(2);
+    insertAtBeginning(3);
+    insertAtBeginning(4);
     display();
     return 0;
 }

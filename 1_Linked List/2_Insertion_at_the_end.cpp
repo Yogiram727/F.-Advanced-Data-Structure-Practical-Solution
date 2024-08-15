@@ -6,23 +6,13 @@ struct Node
     int data;
     struct Node *next;
 };
-
 struct Node *head = NULL;
 
-void insertAtBeginning(int new_data)
+void insertAtEnd(int new_value)
 {
     // struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *new_node = new Node;
-    new_node->data = new_data;
-    new_node->next = head;
-    head = new_node;
-}
-
-void insertAtEnd(int new_data)
-{
-    // struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *new_node = new Node;
-    new_node->data = new_data;
+    struct Node *new_node = new Node(); // Use `new` instead of `malloc`
+    new_node->data = new_value;
     new_node->next = NULL;
     if (head == NULL)
     {
@@ -52,12 +42,11 @@ void display()
 
 int main()
 {
-    int new_value;
+    int new_data;
     for (int i = 0; i < 5; i++)
     {
-        cin >> new_value;
-        // insertAtBeginning(new_value);
-        insertAtEnd(new_value);
+        cin >> new_data;
+        insertAtEnd(new_data);
     }
     display();
     return 0;

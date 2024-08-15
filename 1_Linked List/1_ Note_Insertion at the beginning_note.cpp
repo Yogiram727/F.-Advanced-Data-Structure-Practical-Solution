@@ -62,4 +62,13 @@ Algorithm for Inserting a Node at the Beginning
 
 4. Update the Head to Point to the New Node
     -> Update the head pointer to point to the new node.
-*/
+
+
+
+          +-----------+      +-----------+      +-----------+
+Head ---> |  data: 10 | ---> |  data: 20 | ---> |  data: 30 |
+          |  next: ----+     |  next: ----+     |  next: NULL|
+          +-----------+      +-----------+      +-----------+
+
+
+          */
