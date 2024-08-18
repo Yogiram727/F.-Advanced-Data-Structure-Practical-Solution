@@ -11,8 +11,7 @@ struct Node *head = NULL;
 
 void insertAtBeginning(int new_data)
 {
-    // struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *new_node = new Node;
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
     new_node->data = new_data;
     new_node->next = head;
     head = new_node;
@@ -20,8 +19,7 @@ void insertAtBeginning(int new_data)
 
 void insertAtEnd(int new_data)
 {
-    // struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *new_node = new Node;
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
     new_node->data = new_data;
     new_node->next = NULL;
     if (head == NULL)
@@ -39,6 +37,26 @@ void insertAtEnd(int new_data)
     }
 }
 
+void insertAfterNode(int value, int new_data)
+{
+    struct Node *current = head;
+    while (current != NULL && current->data != value)
+    {
+        current = current->next;
+    }
+
+    if (current == NULL)
+    {
+        cout << "The Given Value Doesn't Exist" << endl;
+        return;
+    }
+
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    new_node->data = new_data;
+    new_node->next = current->next;
+    current->next = new_node;
+}
+
 void display()
 {
     struct Node *ptr = head;
@@ -52,13 +70,23 @@ void display()
 
 int main()
 {
-    int new_value;
+    int new_data;
     for (int i = 0; i < 5; i++)
     {
-        cin >> new_value;
-        // insertAtBeginning(new_value);
-        insertAtEnd(new_value);
+        cin >> new_data;
+        insertAtBeginning(new_data);
+        // insertAtEnd(new_data);
     }
+    cout << "Current List: ";
     display();
-    return 0;
+
+    int value, new_value;
+    cout << "Enter the value after which to insert: ";
+    cin >> value;
+    cout << "Enter the value to be insserted: ";
+    cin >> new_value;
+    insertAfterNode(value, new_value);
+
+    cout << "Updated List: ";
+    display();
 }
