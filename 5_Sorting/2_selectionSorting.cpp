@@ -5,7 +5,6 @@ void selectionSort(int arr[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
-
         int minIndex = i;
 
         for (int j = i + 1; j < n; j++)
@@ -15,6 +14,8 @@ void selectionSort(int arr[], int n)
                 minIndex = j;
             }
         }
+
+        // swap the found minimum element with the first element
         if (minIndex != i)
         {
             int temp = arr[i];
@@ -27,14 +28,14 @@ void selectionSort(int arr[], int n)
 int main()
 {
     int arr[5], n = 5;
-    cout << "Enter 5 Elements of array to be sorted:" << endl;
-    for (int i = 0; i < 5; i++)
+    cout << "Enter 5 element of array: " << endl;
+    for (int i = 0; i < n; i++)
     {
         cin >> arr[i];
     }
 
     selectionSort(arr, n);
-    cout << "Elements After Sorting :" << endl;
+    cout << "Element after sorting : " << endl;
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
