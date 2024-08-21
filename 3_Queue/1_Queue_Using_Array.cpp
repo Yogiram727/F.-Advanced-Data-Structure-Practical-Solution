@@ -1,78 +1,69 @@
 #include <iostream>
 using namespace std;
 
-int rear = -1, front = -1, queue[5], n = 5;
+int queue[5], n = 5, front = -1, rear = -1;
 
 void insert(int val)
 {
-    if ((rear == front - 1 || (front == 0 && front == n - 1)))
+    if ((rear + 1) % n == front)
     {
-        cout << "Queue OverFlow" << endl;
+        cout << "Queue Overflow" << endl;
     }
     else
     {
-        if (front == -1 || rear == -1)
+        if (front == -1) // Queue is empty
         {
             front = 0;
             rear = 0;
-            queue[rear] = val;
-        }
-        else if (front != 0 && rear == n - 1)
-        {
-            rear = 0;
-            queue[rear] = val;
         }
         else
         {
-            rear++;
-            queue[rear] = val;
+            rear = (rear + 1) % n;
         }
+        queue[rear] = val;
     }
 }
 
 void Delete()
 {
-    if (front == -1 && rear == -1)
+    if (front == -1)
     {
-        cout << "Queue Underflow";
+        cout << "Queue Underflow" << endl;
         return;
     }
-    else if (front == rear)
+
+    cout << "Element deleted is : " << queue[front] << endl;
+
+    if (front == rear) // Queue has only one element
     {
-        cout << "Element delete from queue is :" << queue[front] << endl;
         front = -1;
         rear = -1;
     }
-    else if (front == n - 1)
-    {
-        cout << "Element deleted from queue is : " << queue[front] << endl;
-        front = 0;
-    }
     else
     {
-        cout << "Element deleted from queue is : " << queue[front] << endl;
-        front++;
+        front = (front + 1) % n;
     }
 }
 
-void Display()
+void display()
 {
     if (front == -1)
     {
         cout << "Queue is empty" << endl;
+        return;
     }
-    else if (rear >= front)
+
+    cout << "Rear = " << rear << " Front = " << front << endl;
+
+    if (rear >= front)
     {
-        cout << "Front= " << front << " and Rear = " << rear << endl;
-        cout << "Queue elements are : outside " << endl;
         for (int i = front; i <= rear; i++)
+        {
             cout << queue[i] << " ";
-        cout << endl;
+        }
     }
     else
     {
-        cout << "Front= " << front << "and Rear = " << rear << endl;
-        cout << "Queue elements aer : Inside " << endl;
         for (int i = front; i < n; i++)
         {
             cout << queue[i] << " ";
@@ -80,12 +71,45 @@ void Display()
         for (int i = 0; i <= rear; i++)
         {
             cout << queue[i] << " ";
-            cout << endl;
         }
     }
+    cout << endl;
 }
+
 int main()
 {
+    cout << "Inserting elements into the queue: " << endl;
     insert(10);
-    Display();
+    insert(20);
+    insert(30);
+    insert(40);
+    insert(50);
+
+    cout << "Queue after insert: " << endl;
+    display();
+
+    cout << "Deleting an element from the queue:" << endl;
+    Delete();
+
+    cout << "Queue after one delete: " << endl;
+    display();
+
+    cout << "Inserting more elements into the queue: " << endl;
+    insert(60);
+    insert(70);
+
+    cout << "Queue after additional inserts: " << endl;
+    display();
+
+    cout << "Deleting all elements from the queue: " << endl;
+    Delete();
+    Delete();
+    Delete();
+    Delete();
+    Delete();
+
+    cout << "Queue after deleting all elements: " << endl;
+    display();
+
+    return 0;
 }

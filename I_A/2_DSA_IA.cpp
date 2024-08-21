@@ -49,3 +49,7 @@ int main()
     selectionSort(data, size);
     printArray(data, size);
 }
+
+/*Problem Statement
+
+Write a program to implement selection sort to sort the array [45,13,112,150,116].*/

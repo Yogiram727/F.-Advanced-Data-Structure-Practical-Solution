@@ -71,3 +71,9 @@ int main()
 
     return 0;
 }
+
+/*Problem Statement
+
+Write a program to implement STACK using array and perform operations in following sequence: - PUSH(5), PUSH(10), PUSH(8), POP, PUSH(12), PUSH(15), PUSH(23), POP, PUSH(27), DISPLAY(). At the end display all existing items of STACK.
+
+*/

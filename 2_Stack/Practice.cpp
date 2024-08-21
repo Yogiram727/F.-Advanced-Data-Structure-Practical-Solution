@@ -1,65 +1,73 @@
 #include <iostream>
 using namespace std;
 
-int Stack[5], n = 5, top = -1;
+int stack[5], n = 5, top = -1;
 
-void PUSH(int new_item)
+void push(int value)
 {
-    if (top == n - 1)
+    if (top >= n - 1)
     {
-        cout << "Stack is Full" << endl;
+        cout << "Stack Overflow" << endl;
+        return;
     }
     else
     {
-        top = top + 1;
-        Stack[top] = new_item;
+        top++;
+        stack[top] = value;
     }
 }
 
-void POP()
+void pop()
 {
     if (top == -1)
     {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack Underflow" << endl;
+        return;
     }
     else
     {
-        cout << "Top Element Deleted" << endl;
         top--;
     }
 }
 
-void DISPLAY()
+void display()
 {
     if (top == -1)
     {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack Underflow" << endl;
+        return;
     }
     else
     {
-        cout << "Stack Elements are : " << endl;
         for (int i = top; i >= 0; i--)
         {
-            cout << Stack[i] << endl;
+            cout << stack[i] << endl;
         }
-        cout << endl;
     }
 }
 
 int main()
 {
-    PUSH(4);
-    PUSH(5);
-    PUSH(6);
-    PUSH(7);
-    PUSH(8);
-    PUSH(9);
-    DISPLAY();
-    POP();
-    POP();
-    POP();
-    POP();
-    POP();
-    POP();
-    DISPLAY();
+    push(3);
+    push(4);
+    push(5);
+    push(6);
+    push(7);
+    push(8);
+    cout << "Stack elements are " << endl;
+    display();
+    pop();
+    pop();
+    pop();
+    cout << "Stack elements after pop" << endl;
+    display();
+    push(10);
+    cout << "Stack elements at the end" << endl;
+    display();
+    pop();
+    pop();
+    pop();
+    pop();
+    pop();
+    return 0;
 }

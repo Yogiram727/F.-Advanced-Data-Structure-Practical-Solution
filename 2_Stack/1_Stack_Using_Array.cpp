@@ -21,6 +21,7 @@ void POP()
     if (top == -1)
     {
         cout << "Stack is Empty" << endl;
+        return;
     }
     else
     {
@@ -63,3 +64,8 @@ int main()
 
     return 0;
 }
+
+/*
+top <= n-1 -> Stack is Full
+top == -1 -> Stack is Empty
+*/

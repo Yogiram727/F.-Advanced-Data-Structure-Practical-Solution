@@ -78,3 +78,20 @@ int main()
 
     return 0;
 }
+
+/*
+
+Problem Statement
+Write a program to implement a Queue using an array and perform operations in the following sequence:
+
+INSERT(15)
+INSERT(40)
+INSERT(38)
+DELETE
+INSERT(82)
+INSERT(65)
+INSERT(43)
+DELETE
+INSERT(87)
+DISPLAY()
+*/

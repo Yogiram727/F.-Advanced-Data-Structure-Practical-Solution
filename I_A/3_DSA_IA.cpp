@@ -39,3 +39,7 @@ int main()
     }
     return 0;
 }
+
+/*Problem Statement
+
+Write a program in C++ to implement iterative Binary search to print index location of data item 16 in the array of [3,6,10,12,16] elements.*/
