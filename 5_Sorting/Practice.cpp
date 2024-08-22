@@ -1,43 +1,57 @@
 #include <iostream>
 using namespace std;
 
-void selectionSort(int arr[], int n)
+void bubbleSorting(int array[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (array[j] > array[j + 1])
+            {
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
+        }
+    }
+}
 
+void selectionSorting(int array[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
         int minIndex = i;
-
         for (int j = i + 1; j < n; j++)
         {
-            if (arr[j] < arr[minIndex])
+            if (array[j] < array[minIndex])
             {
                 minIndex = j;
             }
         }
         if (minIndex != i)
         {
-            int temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
+            int temp = array[i];
+            array[i] = array[minIndex];
+            array[minIndex] = temp;
         }
     }
 }
 
 int main()
 {
-    int arr[5], n = 5;
-    cout << "Enter 5 Elements of array to be sorted:" << endl;
+    int array[5], n = 5;
+    cout << "Enter 5 elements of array" << endl;
     for (int i = 0; i < 5; i++)
     {
-        cin >> arr[i];
+        cin >> array[i];
     }
-
-    selectionSort(arr, n);
-    cout << "Elements After Sorting :" << endl;
+    // bubbleSorting(array, n);
+    selectionSorting(array, n);
+    cout << "Array after sorting" << endl;
     for (int i = 0; i < n; i++)
     {
-        cout << arr[i] << " ";
+        cout << array[i] << " ";
     }
     cout << endl;
     return 0;
