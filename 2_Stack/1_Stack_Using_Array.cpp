@@ -1,18 +1,19 @@
 #include <iostream>
 using namespace std;
 
-int Stack[5], n = 5, top = -1;
+int top = -1, stack[5], n = 5;
 
 void PUSH(int item)
 {
-    if (top >= n - 1)
+    if (top == n - 1)
     {
-        cout << "Stack is Full" << endl;
+        cout << "Stack Overflow" << endl;
+        return;
     }
     else
     {
-        top = top + 1;
-        Stack[top] = item;
+        top++;
+        stack[top] = item;
     }
 }
 
@@ -21,25 +22,24 @@ void POP()
     if (top == -1)
     {
         cout << "Stack is Empty" << endl;
-        return;
     }
     else
     {
-        cout << "Top Element Deleted" << endl;
         top--;
     }
 }
-void DISPLAY()
+
+void display()
 {
     if (top == -1)
     {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack Underflow" << endl;
     }
     else
     {
         for (int i = top; i >= 0; i--)
         {
-            cout << "Stack Elements are : " << Stack[i] << endl;
+            cout << stack[i] << endl;
         }
     }
 }
@@ -47,25 +47,22 @@ void DISPLAY()
 int main()
 {
     PUSH(10);
-    PUSH(20);
-    PUSH(30);
-    PUSH(40);
-    PUSH(50);
-    PUSH(60);
-    DISPLAY();
+    PUSH(2);
+    PUSH(3);
+    PUSH(4);
+    cout << "Stack items" << endl;
+    display();
+    cout << endl;
+    POP();
+    POP();
+    cout << "Stack after POP" << endl;
+    display();
+    cout << endl;
     POP();
     POP();
     POP();
-    POP();
-    POP();
-    POP();
-    POP();
-    DISPLAY();
-
+    cout << "Stack after all POP" << endl;
+    display();
+    cout << endl;
     return 0;
 }
-
-/*
-top <= n-1 -> Stack is Full
-top == -1 -> Stack is Empty
-*/

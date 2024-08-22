@@ -21,19 +21,22 @@ void POP()
     if (top == NULL)
     {
         cout << "Stack is Empty" << endl;
+        return;
     }
-    else
-    {
-        struct Node *temp = NULL;
-        temp = top;
-        top = top->next;
-        free(temp);
-    }
+    struct Node *temp = top;
+    top = top->next;
+    free(temp);
 }
 
 void display()
 {
     struct Node *ptr = top;
+    if (ptr == NULL)
+    {
+        cout << "Stack is Empty" << endl;
+        return;
+    }
+
     while (ptr != NULL)
     {
         cout << ptr->data << endl;
@@ -45,21 +48,17 @@ void display()
 int main()
 {
     PUSH(10);
-    PUSH(2);
-    PUSH(3);
-    PUSH(5);
-    cout << "Stack item list: " << endl;
+    PUSH(20);
+    PUSH(50);
+    PUSH(60);
     display();
     cout << endl;
     POP();
     POP();
-    cout << "Stack after POP: " << endl;
     display();
     cout << endl;
     POP();
     POP();
     POP();
     display();
-    cout << endl;
-    return 0;
 }
