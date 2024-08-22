@@ -6,11 +6,11 @@ struct Node
     int data;
     struct Node *next;
 };
-struct Node *top = NULL;
+Node *top = NULL;
 
 void PUSH(int item)
 {
-    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node *));
     new_node->data = item;
     new_node->next = top;
     top = new_node;
@@ -24,7 +24,8 @@ void POP()
     }
     else
     {
-        struct Node *temp = NULL;
+        cout << " Top Element Deleted: " << top->data << endl;
+        struct Node *temp;
         temp = top;
         top = top->next;
         free(temp);
@@ -33,33 +34,32 @@ void POP()
 
 void display()
 {
-    struct Node *ptr = top;
-    while (ptr != NULL)
+    if (top == NULL)
     {
-        cout << ptr->data << endl;
-        ptr = ptr->next;
+        cout << "Stack is Empty" << endl;
     }
-    cout << endl;
+    else
+    {
+        struct Node *ptr = top;
+        while (ptr != NULL)
+        {
+            cout << ptr->data << endl;
+            ptr = ptr->next;
+        }
+        cout << endl;
+    }
 }
 
 int main()
 {
     PUSH(10);
-    PUSH(2);
-    PUSH(3);
-    PUSH(5);
-    cout << "Stack item list: " << endl;
+    PUSH(20);
+    PUSH(30);
     display();
-    cout << endl;
     POP();
     POP();
-    cout << "Stack after POP: " << endl;
+    POP();
+
     display();
-    cout << endl;
-    POP();
-    POP();
-    POP();
-    display();
-    cout << endl;
     return 0;
 }

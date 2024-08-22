@@ -16,6 +16,7 @@ int linearSearch(int array[], int n, int x)
 int binarySearch(int array[], int n, int x)
 {
     int first = 0, last = n - 1, middle;
+
     while (first <= last)
     {
         middle = first + (last - first) / 2;
@@ -41,12 +42,11 @@ int binarySearch(int array[], int n, int x)
 int main()
 {
     int array[5], n = 5, x = 16;
-    cout << "Enter 5 element of array(sorted)" << endl;
-    for (int i = 0; i < n; i++)
+    cout << "Enter 5 Element of array" << endl;
+    for (int i = 0; i < 5; i++)
     {
         cin >> array[i];
     }
-
     // int result = linearSearch(array, n, x);
     int result = binarySearch(array, n, x);
     if (result == -1)
@@ -55,8 +55,6 @@ int main()
     }
     else
     {
-        cout << "Element is at index: " << result;
+        cout << "Given Element is at index: " << result;
     }
-    cout << endl;
-    return 0;
 }
