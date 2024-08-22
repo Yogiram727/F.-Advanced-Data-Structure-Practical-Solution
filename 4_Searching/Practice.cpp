@@ -1,25 +1,38 @@
 #include <iostream>
 using namespace std;
 
+int linearSearch(int array[], int n, int x)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (array[i] == x)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 int binarySearch(int array[], int n, int x)
 {
     int first = 0, last = n - 1, middle;
-
     while (first <= last)
     {
         middle = first + (last - first) / 2;
-
         if (array[middle] == x)
         {
             return middle;
         }
-        else if (array[middle] < x)
-        {
-            first = middle + 1;
-        }
         else
         {
-            last = middle - 1;
+            if (array[middle] > x)
+            {
+                last = middle - 1;
+            }
+            else
+            {
+                first = middle + 1;
+            }
         }
     }
     return -1;
@@ -27,24 +40,23 @@ int binarySearch(int array[], int n, int x)
 
 int main()
 {
-    int array[5];
-    int n = 5;
-    for (int i = 0; i < 5; i++)
+    int array[5], n = 5, x = 16;
+    cout << "Enter 5 element of array(sorted)" << endl;
+    for (int i = 0; i < n; i++)
     {
         cin >> array[i];
     }
-    cout << endl;
 
-    int x = 16;
+    // int result = linearSearch(array, n, x);
     int result = binarySearch(array, n, x);
-
     if (result == -1)
     {
-        cout << "Not Found" << endl;
+        cout << "Element not found" << endl;
     }
     else
     {
-        cout << result;
+        cout << "Element is at index: " << result;
     }
+    cout << endl;
     return 0;
 }

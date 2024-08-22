@@ -3,11 +3,11 @@ using namespace std;
 
 int queue[5], n = 5, front = -1, rear = -1;
 
-void insert(int val)
+void insert(int value)
 {
     if ((rear + 1) % n == front)
     {
-        cout << "Queue is Full" << endl;
+        cout << "Queue Overflow" << endl;
         return;
     }
     else
@@ -21,16 +21,15 @@ void insert(int val)
         {
             rear = (rear + 1) % n;
         }
-        queue[rear] = val;
+        queue[rear] = value;
     }
 }
 
-void Delete()
+void Dequeue()
 {
-
     if (front == -1)
     {
-        cout << "Queue is empty" << endl;
+        cout << "Queue Underflow" << endl;
         return;
     }
     else
@@ -51,7 +50,8 @@ void display()
 {
     if (front == -1)
     {
-        cout << "Queue is empty" << endl;
+        cout << "Queue Underflow" << endl;
+        return;
     }
     else
     {
@@ -61,7 +61,6 @@ void display()
             {
                 cout << queue[i] << " ";
             }
-            cout << endl;
         }
         else
         {
@@ -73,29 +72,31 @@ void display()
             {
                 cout << queue[i] << " ";
             }
-            cout << endl;
         }
+        cout << endl;
     }
 }
 
 int main()
 {
-    insert(4);
-    insert(5);
-    insert(6);
-    insert(7);
-    insert(8);
     insert(10);
+    insert(20);
+    insert(30);
+    insert(40);
+    insert(50);
+    insert(60);
+    cout << "Queue after insertion" << endl;
     display();
-    Delete();
-    Delete();
-    Delete();
-    Delete();
+    Dequeue();
+    Dequeue();
+    Dequeue();
+    cout << "Queue after partial deletion" << endl;
     display();
-    Delete();
-    Delete();
+    Dequeue();
+    Dequeue();
+    Dequeue();
+    cout << "Queue after fully deletion" << endl;
     display();
-    insert(9);
-    insert(10);
-    display();
+    cout << endl;
+    return 0;
 }
