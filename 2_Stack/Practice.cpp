@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-int stack[5], n = 5, top = -1;
+int Stack[5], n = 5, top = -1;
 
-void push(int value)
+void PUSH(int value)
 {
-    if (top >= n - 1)
+    if (top == n - 1)
     {
         cout << "Stack Overflow" << endl;
         return;
@@ -13,11 +13,11 @@ void push(int value)
     else
     {
         top++;
-        stack[top] = value;
+        Stack[top] = value;
     }
 }
 
-void pop()
+void POP()
 {
     if (top == -1)
     {
@@ -37,37 +37,31 @@ void display()
         cout << "Stack Underflow" << endl;
         return;
     }
-    else
+    for (int i = top; i >= 0; i--)
     {
-        for (int i = top; i >= 0; i--)
-        {
-            cout << stack[i] << endl;
-        }
+        cout << Stack[i] << endl;
     }
+    cout << endl;
 }
 
 int main()
 {
-    push(3);
-    push(4);
-    push(5);
-    push(6);
-    push(7);
-    push(8);
-    cout << "Stack elements are " << endl;
+    PUSH(1);
+    PUSH(2);
+    PUSH(3);
+    PUSH(4);
+    PUSH(5);
+    PUSH(6);
+    cout << "Element of Stack" << endl;
     display();
-    pop();
-    pop();
-    pop();
-    cout << "Stack elements after pop" << endl;
+    POP();
+    POP();
+    cout << "Stack after deletion" << endl;
     display();
-    push(10);
-    cout << "Stack elements at the end" << endl;
+    cout << endl;
+    POP();
+    POP();
+    POP();
+    cout << "Stack after Deletion of all" << endl;
     display();
-    pop();
-    pop();
-    pop();
-    pop();
-    pop();
-    return 0;
 }
