@@ -1,80 +1,69 @@
 #include <iostream>
 using namespace std;
 
-int queue[5], n = 5, front = -1, rear = -1;
+struct Node
+{
+    int data;
+    struct Node *next;
+};
+
+struct Node *front = NULL;
+struct Node *rear = NULL;
 
 void insert(int value)
 {
-    if ((rear + 1) % n == front)
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    new_node->data = value;
+    new_node->next = NULL;
+    if (front == NULL)
     {
-        cout << "Queue Overflow" << endl;
-        return;
+        front = new_node;
+        rear = new_node;
+        rear->next = front;
     }
     else
     {
-        if (front == -1)
-        {
-            front = 0;
-            rear = 0;
-        }
-        else
-        {
-            rear = (rear + 1) % n;
-        }
-        queue[rear] = value;
+        rear->next = new_node;
+        rear = new_node;
+        rear->next = front;
     }
 }
 
-void Dequeue()
+void Delete()
 {
-    if (front == -1)
+    if (front == NULL)
     {
         cout << "Queue Underflow" << endl;
         return;
     }
+    else if (front == rear)
+    {
+        free(front);
+        front = NULL;
+        rear = NULL;
+    }
     else
     {
-        if (front == rear)
-        {
-            front = -1;
-            rear = -1;
-        }
-        else
-        {
-            front = (front + 1) % n;
-        }
+        struct Node *temp = front;
+        front = front->next;
+        rear->next = front;
+        free(temp);
     }
 }
 
 void display()
 {
-    if (front == -1)
+    if (front == NULL)
     {
-        cout << "Queue Underflow" << endl;
+        cout << "Stack Underflow" << endl;
         return;
     }
-    else
+    struct Node *ptr = front;
+    do
     {
-        if (rear >= front)
-        {
-            for (int i = front; i <= rear; i++)
-            {
-                cout << queue[i] << " ";
-            }
-        }
-        else
-        {
-            for (int i = front; i < n; i++)
-            {
-                cout << queue[i] << " ";
-            }
-            for (int i = 0; i <= rear; i++)
-            {
-                cout << queue[i] << " ";
-            }
-        }
-        cout << endl;
-    }
+        cout << ptr->data << " ";
+        ptr = ptr->next;
+    } while (ptr != front);
 }
 
 int main()
@@ -83,19 +72,15 @@ int main()
     insert(20);
     insert(30);
     insert(40);
-    insert(50);
-    insert(60);
-    cout << "Queue after insertion" << endl;
     display();
-    Dequeue();
-    Dequeue();
-    Dequeue();
-    cout << "Queue after partial deletion" << endl;
+    cout << endl;
+    Delete();
+    Delete();
     display();
-    Dequeue();
-    Dequeue();
-    Dequeue();
-    cout << "Queue after fully deletion" << endl;
+    cout << endl;
+    Delete();
+    Delete();
+    cout << endl;
     display();
     cout << endl;
     return 0;
