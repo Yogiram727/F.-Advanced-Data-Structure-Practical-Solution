@@ -37,47 +37,40 @@ void insertAtEnd(int value)
     }
 }
 
-void insertAfterNode(int prev, int value)
+void insertAfter(int prev, int value)
 {
     struct Node *current = head;
     while (current != NULL && current->data != prev)
     {
         current = current->next;
     }
-    if (current == NULL)
-    {
-        cout << "Data Not Found" << endl;
-    }
-    else
-    {
-        struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-        new_node->data = value;
-        new_node->next = current->next;
-        current->next = new_node;
-    }
+    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    new_node->data = value;
+    new_node->next = current->next;
+    current->next = new_node;
 }
 
 void delStart()
 {
+    struct Node *temp = NULL;
     if (head == NULL)
     {
-        cout << "Empty List" << endl;
-        return;
+        cout << "List is Empty" << endl;
     }
     else
     {
-        struct Node *temp;
         temp = head;
         head = head->next;
         free(temp);
     }
 }
 
-void delend()
+void delEnd()
 {
+
     if (head == NULL)
     {
-        cout << "Empty List " << endl;
+        cout << "List is Empty" << endl;
         return;
     }
     if (head->next == NULL)
@@ -105,6 +98,7 @@ void display()
         cout << ptr->data << " ";
         ptr = ptr->next;
     }
+    cout << endl;
 }
 
 int main()
@@ -113,27 +107,29 @@ int main()
     for (int i = 0; i < 5; i++)
     {
         cin >> value;
-        // insertAtBeginning(value);
-        insertAtEnd(value);
+        insertAtBeginning(value);
+        // insertAtEnd(value);
     }
+    display();
+    cout << endl;
+
     cout << "Given Linked List" << endl;
     display();
     cout << endl;
     int prev, new_value;
-
-    cout << "Insert the value after which you want to insert the value: " << endl;
+    cout << "Enter after which node you want to insert: " << endl;
     cin >> prev;
-    cout << endl;
-    cout << "Insert the value that you want to insert" << endl;
+    cout << "Enter the value you want to insert" << endl;
     cin >> new_value;
-    insertAfterNode(prev, new_value);
-    cout << "Linked List after insertion of new value: " << endl;
+    insertAfter(prev, new_value);
+    cout << "After Insertion" << endl;
     display();
-    delend();
     cout << endl;
-    display();
     delStart();
-    cout << endl;
     display();
+    cout << endl;
+    delEnd();
+    display();
+    cout << endl;
     return 0;
 }
