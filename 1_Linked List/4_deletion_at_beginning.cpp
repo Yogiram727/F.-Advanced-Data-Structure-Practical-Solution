@@ -21,12 +21,16 @@ void deleteBeginning()
 {
     if (head == NULL)
     {
-        cout << "Underflow: List is Empty " << endl;
+        cout << "Empty List" << endl;
         return;
     }
-    struct Node *temp = head;
-    head = head->next;
-    free(temp);
+    else
+    {
+        struct Node *temp;
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
 }
 
 void display()

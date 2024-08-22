@@ -31,23 +31,26 @@ void insertAtEnd(int new_data)
 
 void deletionAtEnd()
 {
-    struct Node *last1;
     if (head == NULL)
     {
-        cout << " List is empty " << endl;
+        cout << "Empty List " << endl;
         return;
     }
-    else
+    if (head->next == NULL)
     {
-        struct Node *last = head;
-        while (last->next != NULL)
-        {
-            last1 = last;
-            last = last->next;
-        }
-        last1->next = NULL;
-        free(last);
+        free(head);
+        head = NULL;
+        return;
     }
+    struct Node *last = head;
+    struct Node *second_last = NULL;
+    while (last->next != NULL)
+    {
+        second_last = last;
+        last = last->next;
+    }
+    second_last->next = NULL;
+    free(last);
 }
 
 void display()
