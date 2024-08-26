@@ -7,11 +7,11 @@ struct Node
     struct Node *next;
 };
 
-struct Node *head = NULL;
+Node *head = nullptr;
 
 void insertAtBeginning(int value)
 {
-    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    Node *new_node = new Node();
     new_node->data = value;
     new_node->next = head;
     head = new_node;
@@ -19,32 +19,35 @@ void insertAtBeginning(int value)
 
 void insertAtEnd(int value)
 {
-    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    Node *new_node = new Node();
     new_node->data = value;
     new_node->next = NULL;
-    if (head == NULL)
+    if (head == nullptr)
     {
         head = new_node;
+        return;
     }
-    else
+    Node *last = nullptr;
+    while (last->next != nullptr)
     {
-        struct Node *last = head;
-        while (last->next != NULL)
-        {
-            last = last->next;
-        }
-        last->next = new_node;
+        last = last->next;
     }
+    last->next = new_node;
 }
 
 void insertAfter(int prev, int value)
 {
-    struct Node *current = head;
-    while (current != NULL && current->data != prev)
+    Node *current = head;
+    while (current != nullptr && current->data != prev)
     {
         current = current->next;
     }
-    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    if (current == nullptr)
+    {
+        cout << "Can't find the node" << endl;
+        return;
+    }
+    Node *new_node = new Node();
     new_node->data = value;
     new_node->next = current->next;
     current->next = new_node;
@@ -52,84 +55,71 @@ void insertAfter(int prev, int value)
 
 void delStart()
 {
-    struct Node *temp = NULL;
-    if (head == NULL)
+    if (head == nullptr)
     {
-        cout << "List is Empty" << endl;
+        cout << "List is empty" << endl;
+        return;
     }
-    else
-    {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
+    Node *temp = head;
+    head = head->next;
+    delete temp;
 }
 
 void delEnd()
 {
-
-    if (head == NULL)
+    if (head == nullptr)
     {
-        cout << "List is Empty" << endl;
+        cout << "List is empty" << endl;
         return;
     }
-    if (head->next == NULL)
-    {
-        free(head);
-        head = NULL;
-        return;
-    }
-    struct Node *last = head;
-    struct Node *second_last = NULL;
-    while (last->next != NULL)
+    Node *last = head;
+    Node *second_last = nullptr;
+    while (last->next != nullptr)
     {
         second_last = last;
         last = last->next;
     }
-    second_last->next = NULL;
-    free(last);
+    second_last->next = nullptr;
+    delete last;
 }
 
 void display()
 {
-    struct Node *ptr = head;
-    while (ptr != NULL)
+    if (head == nullptr)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+    Node *ptr = head;
+    while (ptr != nullptr)
     {
         cout << ptr->data << " ";
         ptr = ptr->next;
     }
-    cout << endl;
 }
 
 int main()
 {
-    int value;
+    int value, prev, newValue;
+    cout << "Enter 5 element to insert in the list " << endl;
     for (int i = 0; i < 5; i++)
     {
         cin >> value;
         insertAtBeginning(value);
         // insertAtEnd(value);
     }
-    display();
-    cout << endl;
 
-    cout << "Given Linked List" << endl;
     display();
+
     cout << endl;
-    int prev, new_value;
-    cout << "Enter after which node you want to insert: " << endl;
+    cout << "Enter after which node you want to insert the new value" << endl;
     cin >> prev;
-    cout << "Enter the value you want to insert" << endl;
-    cin >> new_value;
-    insertAfter(prev, new_value);
-    cout << "After Insertion" << endl;
-    display();
     cout << endl;
-    delStart();
-    display();
+    cout << "Enter the value that you want to insert" << endl;
+    cin >> newValue;
+    insertAfter(prev, newValue);
     cout << endl;
-    delEnd();
+    cout << "List after insertion" << endl;
     display();
-    cout << endl;
     return 0;
 }

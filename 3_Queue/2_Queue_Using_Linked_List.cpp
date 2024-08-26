@@ -4,90 +4,94 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node *next;
+    Node *next;
 };
+Node *front = nullptr;
+Node *rear = nullptr;
 
-struct Node *front = NULL;
-struct Node *rear = NULL;
-
-void insert(int value)
+void enqueue(int value)
 {
-    struct Node *new_node = new Node();
+    Node *new_node = new Node();
     new_node->data = value;
-    new_node->next = NULL;
+    new_node->next = nullptr;
 
-    if (front == NULL)
+    if (front == nullptr)
     {
         front = new_node;
         rear = new_node;
-        new_node->next = front;
+        rear->next = front;
     }
-
     else
     {
-        rear->next = new_node; // current rear
-        rear = new_node;       // update rear
-        rear->next = front;    // new rear
+        rear->next = new_node;
+        rear = new_node;
+        rear->next = front;
     }
 }
 
-void Dequeue()
+void dequeue()
 {
-    if (front == NULL)
+    if (front == nullptr)
     {
-        cout << "Queue Underflow" << endl;
+        cout << "Queue Undeflow" << endl;
         return;
-    }
-    else if (front == rear)
-    {
-        delete front;
-        front = NULL;
-        rear = NULL;
     }
     else
     {
-        Node *temp = front;
-        front = front->next;
-        rear->next = front;
-        delete temp;
+        if (rear == front)
+        {
+            delete front;
+            rear = nullptr;
+            front = nullptr;
+        }
+        else
+        {
+            Node *temp = front;
+            front = front->next;
+            rear->next = front;
+            delete temp;
+        }
     }
 }
 
 void display()
 {
-    if (front == NULL)
+    if (front == nullptr)
     {
         cout << "Queue Underflow" << endl;
         return;
     }
     else
     {
-        struct Node *ptr = front;
+        Node *ptr = front;
         do
         {
             cout << ptr->data << " ";
             ptr = ptr->next;
         } while (ptr != front);
-        cout << endl;
     }
 }
 
 int main()
 {
-    insert(1);
-    insert(20);
-    insert(30);
-    insert(40);
-    cout << "Element in Queue" << endl;
-    display();
-    Dequeue();
-    Dequeue();
-    cout << "Element in Queue ater deletion" << endl;
-    display();
-    Dequeue();
-    Dequeue();
-    cout << "Element in Queue" << endl;
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    enqueue(40);
+    cout << endl;
+    cout << "Queue Elements" << endl;
     display();
     cout << endl;
+    dequeue();
+    dequeue();
+    cout << "Queue After partial deletion" << endl;
+    display();
+    cout << endl;
+    dequeue();
+    dequeue();
+    dequeue();
+    cout << endl;
+    cout << "Queue after complete deletion" << endl;
+    display();
     return 0;
 }

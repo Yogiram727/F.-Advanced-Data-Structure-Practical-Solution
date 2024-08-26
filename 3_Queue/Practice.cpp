@@ -4,18 +4,18 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node *next;
+    Node *next;
 };
+Node *front = nullptr;
+Node *rear = nullptr;
 
-struct Node *front = NULL;
-struct Node *rear = NULL;
-
-void insert(int value)
+void enqueue(int value)
 {
-    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
+    Node *new_node = new Node();
     new_node->data = value;
-    new_node->next = NULL;
-    if (front == NULL)
+    new_node->next = nullptr;
+
+    if (front == nullptr)
     {
         front = new_node;
         rear = new_node;
@@ -29,59 +29,69 @@ void insert(int value)
     }
 }
 
-void Delete()
+void dequeue()
 {
-    if (front == NULL)
+    if (front == nullptr)
     {
-        cout << "Queue Underflow" << endl;
+        cout << "Queue Undeflow" << endl;
         return;
-    }
-    else if (front == rear)
-    {
-        free(front);
-        front = NULL;
-        rear = NULL;
     }
     else
     {
-        struct Node *temp = front;
-        front = front->next;
-        rear->next = front;
-        free(temp);
+        if (rear == front)
+        {
+            delete front;
+            rear = nullptr;
+            front = nullptr;
+        }
+        else
+        {
+            Node *temp = front;
+            front = front->next;
+            rear->next = front;
+            delete temp;
+        }
     }
 }
 
 void display()
 {
-    if (front == NULL)
+    if (front == nullptr)
     {
-        cout << "Stack Underflow" << endl;
+        cout << "Queue Underflow" << endl;
         return;
     }
-    struct Node *ptr = front;
-    do
+    else
     {
-        cout << ptr->data << " ";
-        ptr = ptr->next;
-    } while (ptr != front);
+        Node *ptr = front;
+        do
+        {
+            cout << ptr->data << " ";
+            ptr = ptr->next;
+        } while (ptr != front);
+    }
 }
 
 int main()
 {
-    insert(10);
-    insert(20);
-    insert(30);
-    insert(40);
+    enqueue(10);
+    enqueue(20);
+    enqueue(30);
+    enqueue(40);
+    cout << endl;
+    cout << "Queue Elements" << endl;
     display();
     cout << endl;
-    Delete();
-    Delete();
+    dequeue();
+    dequeue();
+    cout << "Queue After partial deletion" << endl;
     display();
     cout << endl;
-    Delete();
-    Delete();
+    dequeue();
+    dequeue();
+    dequeue();
     cout << endl;
+    cout << "Queue after complete deletion" << endl;
     display();
-    cout << endl;
     return 0;
 }

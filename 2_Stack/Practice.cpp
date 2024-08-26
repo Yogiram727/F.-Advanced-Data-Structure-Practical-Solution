@@ -4,61 +4,59 @@ using namespace std;
 struct Node
 {
     int data;
-    struct Node *next;
+    Node *next;
 };
-struct Node *top = NULL;
+Node *top = nullptr;
 
-void PUSH(int item)
+void push(int value)
 {
-    struct Node *new_node = (struct Node *)malloc(sizeof(struct Node));
-    new_node->data = item;
+    Node *new_node = new Node();
+    new_node->data = value;
     new_node->next = top;
     top = new_node;
 }
 
-void POP()
+void pop()
 {
-    if (top == NULL)
+    if (top == nullptr)
     {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack Underflow" << endl;
         return;
     }
-    struct Node *temp = top;
+    Node *temp = top;
     top = top->next;
-    free(temp);
+    delete temp;
 }
 
 void display()
 {
-    struct Node *ptr = top;
-    if (ptr == NULL)
+    if (top == nullptr)
     {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack Underflow" << endl;
         return;
     }
-
-    while (ptr != NULL)
+    Node *ptr = top;
+    while (ptr != nullptr)
     {
         cout << ptr->data << endl;
         ptr = ptr->next;
     }
-    cout << endl;
 }
 
 int main()
 {
-    PUSH(10);
-    PUSH(20);
-    PUSH(50);
-    PUSH(60);
+    push(10);
+    push(2);
+    push(3);
+    cout << endl;
     display();
     cout << endl;
-    POP();
-    POP();
+    pop();
+    pop();
     display();
     cout << endl;
-    POP();
-    POP();
-    POP();
+    pop();
     display();
+    cout << endl;
+    return 0;
 }
