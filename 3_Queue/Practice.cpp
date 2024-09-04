@@ -6,6 +6,7 @@ struct Node
     int data;
     Node *next;
 };
+
 Node *front = nullptr;
 Node *rear = nullptr;
 
@@ -21,6 +22,7 @@ void enqueue(int value)
         rear = new_node;
         rear->next = front;
     }
+
     else
     {
         rear->next = new_node;
@@ -33,7 +35,7 @@ void dequeue()
 {
     if (front == nullptr)
     {
-        cout << "Queue Undeflow" << endl;
+        cout << "List is empty" << endl;
         return;
     }
     else
@@ -58,18 +60,15 @@ void display()
 {
     if (front == nullptr)
     {
-        cout << "Queue Underflow" << endl;
+        cout << "List is empty" << endl;
         return;
     }
-    else
+    Node *ptr = front;
+    do
     {
-        Node *ptr = front;
-        do
-        {
-            cout << ptr->data << " ";
-            ptr = ptr->next;
-        } while (ptr != front);
-    }
+        cout << ptr->data << " ";
+        ptr = ptr->next;
+    } while (ptr != front);
 }
 
 int main()
@@ -78,20 +77,11 @@ int main()
     enqueue(20);
     enqueue(30);
     enqueue(40);
-    cout << endl;
-    cout << "Queue Elements" << endl;
     display();
     cout << endl;
     dequeue();
     dequeue();
-    cout << "Queue After partial deletion" << endl;
-    display();
-    cout << endl;
-    dequeue();
-    dequeue();
-    dequeue();
-    cout << endl;
-    cout << "Queue after complete deletion" << endl;
+    cout << "List after partial deletion" << endl;
     display();
     return 0;
 }

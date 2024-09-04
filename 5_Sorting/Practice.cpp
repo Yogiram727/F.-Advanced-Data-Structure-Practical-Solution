@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void bubbleSorting(int array[], int n)
+void bubbleSort(int array[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
@@ -17,9 +17,9 @@ void bubbleSorting(int array[], int n)
     }
 }
 
-int selectionSort(int array[], int n)
+void selectionSort(int array[], int n)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n - 1; i++)
     {
         int minIndex = i;
         for (int j = i + 1; j < n; j++)
@@ -41,20 +41,18 @@ int selectionSort(int array[], int n)
 int main()
 {
     int array[5], n = 5;
-    cout << "Enter 5 elements to be sorted" << endl;
-    for (int i = 0; i < n; i++)
+    cout << "Enter 5 elements of array" << endl;
+    for (int i = 0; i < 5; i++)
     {
         cin >> array[i];
     }
-
-    // bubbleSorting(array, n);
+    // bubbleSort(array, n);
     selectionSort(array, n);
     cout << endl;
-    cout << "Array After Sorting" << endl;
+    cout << "Array after Sorting" << endl;
     for (int i = 0; i < n; i++)
     {
         cout << array[i] << " ";
     }
-    cout << endl;
     return 0;
 }

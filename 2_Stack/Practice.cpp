@@ -6,12 +6,13 @@ struct Node
     int data;
     Node *next;
 };
+
 Node *top = nullptr;
 
-void push(int value)
+void push(int item)
 {
     Node *new_node = new Node();
-    new_node->data = value;
+    new_node->data = item;
     new_node->next = top;
     top = new_node;
 }
@@ -20,7 +21,7 @@ void pop()
 {
     if (top == nullptr)
     {
-        cout << "Stack Underflow" << endl;
+        cout << "Stack is empty" << endl;
         return;
     }
     Node *temp = top;
@@ -32,30 +33,33 @@ void display()
 {
     if (top == nullptr)
     {
-        cout << "Stack Underflow" << endl;
+        cout << "Stack is empty" << endl;
         return;
     }
-    Node *ptr = top;
-    while (ptr != nullptr)
+    else
     {
-        cout << ptr->data << endl;
-        ptr = ptr->next;
+        Node *ptr = top;
+        while (ptr != nullptr)
+        {
+            cout << ptr->data << endl;
+            ptr = ptr->next;
+        }
     }
+
+    cout << endl;
 }
 
 int main()
 {
     push(10);
-    push(2);
-    push(3);
-    cout << endl;
+    push(30);
+    push(100);
+    push(20);
     display();
     cout << endl;
     pop();
     pop();
-    display();
-    cout << endl;
-    pop();
+    cout << "List after partial deletion" << endl;
     display();
     cout << endl;
     return 0;
