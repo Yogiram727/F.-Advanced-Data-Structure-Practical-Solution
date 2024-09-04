@@ -25,13 +25,13 @@ int binarySearch(int array[], int n, int x)
         }
         else
         {
-            if (array[middle] < x)
+            if (array[middle] > x)
             {
-                first = middle + 1;
+                last = middle - 1;
             }
             else
             {
-                last = middle - 1;
+                first = middle + 1;
             }
         }
     }
@@ -40,20 +40,22 @@ int binarySearch(int array[], int n, int x)
 
 int main()
 {
-    int array[5], n = 5, x = 15;
-    for (int i = 0; i < n; i++)
+    int array[5], n = 5, x = 4;
+    cout << "Enter five element of the array" << endl;
+    for (int i = 0; i < 5; i++)
     {
         cin >> array[i];
     }
-    // int result = linearSearch(array, n, x);
-    int result = binarySearch(array, n, x);
+    int result = linearSearch(array, n, x);
+    // int result = binarySearch(array, n, x);
     if (result == -1)
     {
-        cout << "Element not found " << endl;
+        cout << "Element is not in the array" << endl;
     }
     else
     {
-        cout << "Element is at index: " << result << endl;
+        cout << "Element is in the index: " << result;
     }
+    cout << endl;
     return 0;
 }
