@@ -6,23 +6,20 @@ struct Node
     int data;
     Node *next;
 };
-
-Node *front = nullptr;
 Node *rear = nullptr;
+Node *front = nullptr;
 
 void enqueue(int value)
 {
     Node *new_node = new Node();
     new_node->data = value;
     new_node->next = nullptr;
-
     if (front == nullptr)
     {
         front = new_node;
         rear = new_node;
         rear->next = front;
     }
-
     else
     {
         rear->next = new_node;
@@ -35,16 +32,15 @@ void dequeue()
 {
     if (front == nullptr)
     {
-        cout << "List is empty" << endl;
+        cout << "Queue is Empty" << endl;
         return;
     }
     else
     {
-        if (rear == front)
+        if (front == rear)
         {
-            delete front;
-            rear = nullptr;
             front = nullptr;
+            rear = nullptr;
         }
         else
         {
@@ -60,15 +56,18 @@ void display()
 {
     if (front == nullptr)
     {
-        cout << "List is empty" << endl;
+        cout << "Queue is Empty" << endl;
         return;
     }
-    Node *ptr = front;
-    do
+    else
     {
-        cout << ptr->data << " ";
-        ptr = ptr->next;
-    } while (ptr != front);
+        Node *ptr = front;
+        do
+        {
+            cout << ptr->data << " ";
+            ptr = ptr->next;
+        } while (ptr != front);
+    }
 }
 
 int main()
@@ -76,12 +75,12 @@ int main()
     enqueue(10);
     enqueue(20);
     enqueue(30);
-    enqueue(40);
+    enqueue(55);
     display();
     cout << endl;
     dequeue();
     dequeue();
-    cout << "List after partial deletion" << endl;
+    cout << "Queue after partial deletion" << endl;
     display();
     return 0;
 }
