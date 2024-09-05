@@ -45,10 +45,18 @@ void insertAfter(int prev, int value)
     {
         current = current->next;
     }
-    Node *new_node = new Node();
-    new_node->data = value;
-    new_node->next = current->next;
-    current->next = new_node;
+    if (current == nullptr)
+    {
+        cout << "Element not found" << endl;
+        return;
+    }
+    else
+    {
+        Node *new_node = new Node();
+        new_node->data = value;
+        new_node->next = current->next;
+        current->next = new_node;
+    }
 }
 
 void delStart()
@@ -75,32 +83,47 @@ void delEnd()
     }
     else
     {
+        if (head->next == nullptr)
+        {
+            delete head;
+            head = nullptr;
+            return;
+        }
         Node *last = head;
-        Node *secondLast = nullptr;
+        Node *second_last = nullptr;
         while (last->next != nullptr)
         {
-            secondLast = last;
+            second_last = last;
             last = last->next;
         }
-        secondLast->next = nullptr;
+        second_last->next = nullptr;
         delete last;
     }
 }
 
 void display()
 {
-    Node *ptr = head;
-    while (ptr != nullptr)
+    if (head == nullptr)
     {
-
-        cout << ptr->data << " ";
-        ptr = ptr->next;
+        cout << "List is empty" << endl;
+        return;
+    }
+    else
+    {
+        Node *ptr = head;
+        while (ptr != nullptr)
+        {
+            cout << ptr->data << " ";
+            ptr = ptr->next;
+        }
+        cout << endl;
     }
 }
 
 int main()
 {
-    int value, prev, newValue;
+    int value, prev, new_value;
+    cout << "Insert 5 value at the beginning" << endl;
     for (int i = 0; i < 5; i++)
     {
         cin >> value;
@@ -109,19 +132,20 @@ int main()
     }
     display();
     cout << endl;
-    cout << "Enter the node after which you want to insert" << endl;
+    cout << "Insert after which number you want to insert the new value" << endl;
     cin >> prev;
-    cout << "Enter the vaue that you want to insert after that node" << endl;
-    cin >> newValue;
-    insertAfter(prev, newValue);
+    cout << endl;
+    cout << "Insert the number that you want to insert" << endl;
+    cin >> new_value;
+    insertAfter(prev, new_value);
     cout << endl;
     cout << "List after insertion" << endl;
     display();
     delStart();
     cout << endl;
     display();
-    cout << endl;
     delEnd();
+    cout << endl;
     display();
     return 0;
 }

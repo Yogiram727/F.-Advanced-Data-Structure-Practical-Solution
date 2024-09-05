@@ -6,6 +6,7 @@ struct Node
     int data;
     Node *next;
 };
+
 Node *top = nullptr;
 
 void push(int item)
@@ -25,9 +26,17 @@ void pop()
     }
     else
     {
-        Node *temp = top;
-        top = top->next;
-        delete temp;
+        if (top->next == nullptr)
+        {
+            delete top;
+            top = nullptr;
+        }
+        else
+        {
+            Node *temp = top;
+            top = top->next;
+            delete temp;
+        }
     }
 }
 
@@ -35,30 +44,31 @@ void display()
 {
     if (top == nullptr)
     {
-        cout << "Stack is Empty" << endl;
+        cout << "Stack is empty" << endl;
         return;
     }
-    Node *ptr = top;
-    while (ptr != nullptr)
+    else
     {
-        cout << ptr->data << endl;
-        ptr = ptr->next;
+        Node *ptr = top;
+        while (ptr != nullptr)
+        {
+            cout << ptr->data << endl;
+            ptr = ptr->next;
+        }
     }
 }
 
 int main()
 {
     push(10);
-    push(70);
-    push(30);
-    push(40);
-    push(50);
+    push(22);
+    push(33);
+    push(44);
     display();
     cout << endl;
     pop();
     pop();
-    pop();
-    cout << "stack after partial deletion" << endl;
+    cout << "Stack after partial deletion" << endl;
     display();
     return 0;
 }
