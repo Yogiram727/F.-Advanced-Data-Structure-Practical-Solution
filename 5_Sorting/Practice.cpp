@@ -41,18 +41,18 @@ void selectionSort(int array[], int n)
 int main()
 {
     int array[5], n = 5;
-    cout << "Enter 5 unsorted element to sort" << endl;
+    cout << "Enter 5 elements to be sorted" << endl;
     for (int i = 0; i < 5; i++)
     {
         cin >> array[i];
     }
     // bubbleSort(array, n);
     selectionSort(array, n);
+
     cout << "Array after sorting" << endl;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < n; i++)
     {
         cout << array[i] << " ";
     }
-    cout << endl;
     return 0;
 }
