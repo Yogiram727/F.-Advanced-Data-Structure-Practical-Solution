@@ -10,15 +10,15 @@ struct Node
 Node *front = nullptr;
 Node *rear = nullptr;
 
-void push(int value)
+void enqueue(int value)
 {
     Node *new_node = new Node();
     new_node->data = value;
     new_node->next = nullptr;
     if (front == nullptr)
     {
-        rear = new_node;
         front = new_node;
+        rear = new_node;
         rear->next = front;
     }
     else
@@ -29,11 +29,11 @@ void push(int value)
     }
 }
 
-void pop()
+void dequeue()
 {
     if (front == nullptr)
     {
-        cout << "Queue is empty" << endl;
+        cout << "Queeue is Empty" << endl;
         return;
     }
     else
@@ -42,14 +42,14 @@ void pop()
         {
             delete front;
             front = nullptr;
-            rear = nullptr;
+            rear == nullptr;
         }
         else
         {
             Node *temp = front;
             front = front->next;
-            delete temp;
             rear->next = front;
+            delete temp;
         }
     }
 }
@@ -70,19 +70,26 @@ void display()
             ptr = ptr->next;
         } while (ptr != front);
     }
+    cout << endl;
 }
 
 int main()
 {
-    push(10);
-    push(55);
-    push(60);
-    push(66);
+    enqueue(10);
+    enqueue(30);
+    enqueue(60);
+    enqueue(80);
+    cout << "Queue before deletion" << endl;
+    display();
+    dequeue();
+    dequeue();
+    dequeue();
+    cout << endl;
+    cout << "Queue after partial deletion" << endl;
     display();
     cout << endl;
-    pop();
-    pop();
-    cout << " Queue after partial deletion" << endl;
+    dequeue();
+    cout << "Queue after fully deletion" << endl;
     display();
     return 0;
 }

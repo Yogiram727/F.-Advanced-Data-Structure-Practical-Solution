@@ -1,59 +1,47 @@
 #include <iostream>
 using namespace std;
 
-struct Node
-{
-    int data;
-    Node *next;
-};
-
-Node *top = nullptr;
+int stack[5], n = 5, top = -1;
 
 void push(int item)
 {
-    Node *new_node = new Node();
-    new_node->data = item;
-    new_node->next = top;
-    top = new_node;
+    if (top == n - 1)
+    {
+        cout << "Stack is full" << endl;
+        return;
+    }
+    else
+    {
+        top++;
+        stack[top] = item;
+    }
 }
 
 void pop()
 {
-    if (top == nullptr)
+    if (top == -1)
     {
         cout << "Stack is empty" << endl;
         return;
     }
     else
     {
-        if (top->next == nullptr)
-        {
-            delete top;
-            top = nullptr;
-        }
-        else
-        {
-            Node *temp = top;
-            top = top->next;
-            delete temp;
-        }
+        top--;
     }
 }
 
 void display()
 {
-    if (top == nullptr)
+    if (top == -1)
     {
         cout << "Stack is empty" << endl;
         return;
     }
     else
     {
-        Node *ptr = top;
-        while (ptr != nullptr)
+        for (int i = top; i >= 0; i--)
         {
-            cout << ptr->data << endl;
-            ptr = ptr->next;
+            cout << stack[i] << endl;
         }
     }
 }
@@ -61,14 +49,15 @@ void display()
 int main()
 {
     push(10);
-    push(22);
-    push(33);
-    push(44);
+    push(20);
+    push(3);
+    push(50);
+    cout << "Stack before deletion" << endl;
     display();
+    pop();
+    pop();
     cout << endl;
-    pop();
-    pop();
-    cout << "Stack after partial deletion" << endl;
+    cout << "Stack after deletion" << endl;
     display();
     return 0;
 }
