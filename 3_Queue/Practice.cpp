@@ -10,15 +10,16 @@ struct Node
 Node *front = nullptr;
 Node *rear = nullptr;
 
-void enqueue(int item)
+void enqueue(int value)
 {
     Node *new_node = new Node();
-    new_node->data = item;
+    new_node->data = value;
     new_node->next = nullptr;
+
     if (front == nullptr)
     {
-        front = new_node;
         rear = new_node;
+        front = new_node;
         rear->next = front;
     }
     else
@@ -70,24 +71,19 @@ void display()
             ptr = ptr->next;
         } while (ptr != front);
     }
-    cout << endl;
 }
 
 int main()
 {
-    enqueue(10);
-    enqueue(44);
-    enqueue(55);
-    enqueue(66);
-    enqueue(77);
+    enqueue(1);
+    enqueue(2);
+    enqueue(4);
     cout << "Queue before deletion" << endl;
     display();
     cout << endl;
-
-    dequeue();
-    dequeue();
     dequeue();
     dequeue();
     cout << "Queue after deletion" << endl;
     display();
+    return 0;
 }

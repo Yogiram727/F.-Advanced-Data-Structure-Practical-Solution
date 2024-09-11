@@ -9,10 +9,10 @@ struct Node
 
 Node *top = nullptr;
 
-void push(int item)
+void push(int value)
 {
     Node *new_node = new Node();
-    new_node->data = item;
+    new_node->data = value;
     new_node->next = top;
     top = new_node;
 }
@@ -21,7 +21,7 @@ void pop()
 {
     if (top == nullptr)
     {
-        cout << "Stack is emtpy" << endl;
+        cout << "Stack is empty" << endl;
         return;
     }
     else
@@ -48,27 +48,19 @@ void display()
             ptr = ptr->next;
         }
     }
-    cout << endl;
 }
 
 int main()
 {
-    push(1);
-    push(2);
-    push(3);
-    push(4);
-    push(5);
-    push(6);
+    push(10);
+    push(20);
+    push(30);
     cout << endl;
     cout << "Stack before deletion" << endl;
     display();
     cout << endl;
+    cout << "Stack after deletion" << endl;
     pop();
-    pop();
-    pop();
-    pop();
-    pop();
-    cout << "stack after deletion" << endl;
     display();
     return 0;
 }

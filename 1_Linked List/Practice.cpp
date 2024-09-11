@@ -22,6 +22,7 @@ void insertAtEnd(int value)
     Node *new_node = new Node();
     new_node->data = value;
     new_node->next = nullptr;
+
     if (head == nullptr)
     {
         head = new_node;
@@ -47,7 +48,7 @@ void insertAfter(int prev, int new_value)
     }
     if (current == nullptr)
     {
-        cout << "Value not found" << endl;
+        cout << "value not found" << endl;
         return;
     }
     else
@@ -68,6 +69,21 @@ void delStart()
     }
     else
     {
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
+void delEnd()
+{
+    if (head == nullptr)
+    {
+        cout << "list is empty" << endl;
+        return;
+    }
+    else
+    {
         if (head->next == nullptr)
         {
             Node *temp = head;
@@ -76,31 +92,16 @@ void delStart()
         }
         else
         {
-            Node *temp = head;
-            head = head->next;
-            delete temp;
+            Node *last = head;
+            Node *second_last = nullptr;
+            while (last->next != nullptr)
+            {
+                second_last = last;
+                last = last->next;
+            }
+            second_last->next = nullptr;
+            delete last;
         }
-    }
-}
-
-void delEnd()
-{
-    if (head == nullptr)
-    {
-        cout << "List is empty" << endl;
-        return;
-    }
-    else
-    {
-        Node *last = head;
-        Node *second_last = nullptr;
-        while (last->next != nullptr)
-        {
-            second_last = last;
-            last = last->next;
-        }
-        second_last->next = nullptr;
-        delete last;
     }
 }
 
@@ -126,30 +127,35 @@ void display()
 int main()
 {
     int value, prev, new_value;
-    cout << "Enter 5 element to insert" << endl;
+    cout << "Enter 5 elements to insert into list" << endl;
     for (int i = 0; i < 5; i++)
     {
         cin >> value;
-        // insertAtFirst(value);
-        insertAtEnd(value);
+        insertAtFirst(value);
+        // insertAtEnd(value);
     }
     cout << endl;
-
+    cout << "Given Linked List" << endl;
     display();
-    cout << "Enter the node after which you want to insert the value" << endl;
+    cout << endl;
+    cout << "Enter the value after which you want to insert a new value" << endl;
     cin >> prev;
-    cout << "Enter the value that you want to insert" << endl;
+    cout << "Enter the new value that you want to insert" << endl;
     cin >> new_value;
     insertAfter(prev, new_value);
+
     cout << endl;
-    cout << "Node after insertion" << endl;
+    cout << "List after insertion of " << new_value << "after " << prev << endl;
     display();
-    cout << "List after deletion of first element " << endl;
+
     delStart();
+    cout << endl;
+    cout << "List after deletion of first element" << endl;
     display();
     cout << endl;
-    cout << "List after deletion of last element" << endl;
     delEnd();
+    cout << "List after deletion of last element" << endl;
     display();
+    cout << endl;
     return 0;
 }

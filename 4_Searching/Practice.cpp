@@ -40,24 +40,22 @@ int binarySearch(int array[], int n, int x)
 
 int main()
 {
-    int array[5], x, n = 5, result;
-    cout << "Enter 5 elements of the array" << endl;
+    int array[5], n = 5, x = 8, result;
+    cout << "Enter 5 elements" << endl;
     for (int i = 0; i < n; i++)
     {
         cin >> array[i];
     }
-    cout << endl;
-    cout << "Enter the element to search" << endl;
-    cin >> x;
-    result = binarySearch(array, n, x);
     // result = linearSearch(array, n, x);
+    result = binarySearch(array, n, x);
     if (result == -1)
     {
-        cout << "Element is not in the array" << endl;
+        cout << "Element is not in the list" << endl;
     }
     else
     {
         cout << "Element is at index: " << result << endl;
     }
+
     return 0;
 }

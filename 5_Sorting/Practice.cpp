@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void bubbleSort(int array[], int n)
+void bubbleSorting(int array[], int n)
 {
     for (int i = 0; i < n - 1; i++)
     {
@@ -41,20 +41,20 @@ void selectionSort(int array[], int n)
 int main()
 {
     int array[5], n = 5;
-    cout << "Enter 5 element to be sorted in array" << endl;
+    cout << "Enter 5 element of array to be sorted" << endl;
+
     for (int i = 0; i < 5; i++)
     {
         cin >> array[i];
     }
-    cout << endl;
-    //  bubbleSort(array, n);
+    // bubbleSorting(array, n);
     selectionSort(array, n);
+    cout << endl;
     cout << "Array after sorting" << endl;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < n; i++)
     {
         cout << array[i] << " ";
     }
 
-    cout << endl;
     return 0;
 }
