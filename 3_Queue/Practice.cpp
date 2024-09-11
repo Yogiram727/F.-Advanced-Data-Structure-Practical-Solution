@@ -10,10 +10,10 @@ struct Node
 Node *front = nullptr;
 Node *rear = nullptr;
 
-void enqueue(int value)
+void enqueue(int item)
 {
     Node *new_node = new Node();
-    new_node->data = value;
+    new_node->data = item;
     new_node->next = nullptr;
     if (front == nullptr)
     {
@@ -33,7 +33,7 @@ void dequeue()
 {
     if (front == nullptr)
     {
-        cout << "Queeue is Empty" << endl;
+        cout << "Queue is empty" << endl;
         return;
     }
     else
@@ -42,7 +42,7 @@ void dequeue()
         {
             delete front;
             front = nullptr;
-            rear == nullptr;
+            rear = nullptr;
         }
         else
         {
@@ -76,20 +76,18 @@ void display()
 int main()
 {
     enqueue(10);
-    enqueue(30);
-    enqueue(60);
-    enqueue(80);
+    enqueue(44);
+    enqueue(55);
+    enqueue(66);
+    enqueue(77);
     cout << "Queue before deletion" << endl;
     display();
-    dequeue();
-    dequeue();
-    dequeue();
     cout << endl;
-    cout << "Queue after partial deletion" << endl;
-    display();
-    cout << endl;
+
     dequeue();
-    cout << "Queue after fully deletion" << endl;
+    dequeue();
+    dequeue();
+    dequeue();
+    cout << "Queue after deletion" << endl;
     display();
-    return 0;
 }
