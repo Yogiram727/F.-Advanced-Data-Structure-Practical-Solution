@@ -1,36 +1,61 @@
 #include <iostream>
-#include <limits.h>
 using namespace std;
 
-int setmini(int A[], int N)
+void bubbleSorting(int array[], int n)
 {
-    int mini = INT_MAX;
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < n - 1; i++)
     {
-        if (A[i] < mini)
+        for (int j = 0; j < n - i - 1; j++)
         {
-            mini = A[i];
-        }
-    }
-    return mini;
-}
-int setmaxi(int A[], int N)
-{
-    int maxi = INT_MIN;
 
-    for (int i = 0; i < N; i++)
-    {
-        if (A[i] > maxi)
-        {
-            maxi = A[i];
+            if (array[j] > array[j + 1])
+            {
+                int temp = array[j];
+                array[j] = array[j + 1];
+                array[j + 1] = temp;
+            }
         }
     }
-    return maxi;
 }
+
+void selectionSorting(int array[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (array[j] < array[minIndex])
+            {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i)
+        {
+            int temp = array[i];
+            array[i] = array[minIndex];
+            array[minIndex] = temp;
+        }
+    }
+}
+
 int main()
 {
-    int A[] = {4, 9, 6, 5, 2, 3};
-    int N = 6;
-    cout << "Minimum element is: " << setmini(A, N) << endl;
-    cout << "Miximum  element is: " << setmaxi(A, N) << endl;
+    int array[5], n = 5;
+    cout << "Enter 5 element in the array to be sorted" << endl;
+    for (int i = 0; i < 5; i++)
+    {
+
+        cin >> array[i];
+    }
+
+    selectionSorting(array, n);
+    // bubbleSorting(array, n);
+    cout << endl;
+    cout << "array after sorting" << endl;
+    for (int i = 0; i < n; i++)
+    {
+        cout << array[i] << " ";
+    }
+    return 0;
 }
