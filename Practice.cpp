@@ -1,61 +1,148 @@
 #include <iostream>
 using namespace std;
 
-void bubbleSorting(int array[], int n)
+struct Node
 {
-    for (int i = 0; i < n - 1; i++)
-    {
-        for (int j = 0; j < n - i - 1; j++)
-        {
+    int data;
+    Node *next;
+};
+Node *head = nullptr;
 
-            if (array[j] > array[j + 1])
+void insertAtFirst(int value)
+{
+    Node *new_node = new Node();
+    new_node->data = value;
+    new_node->next = head;
+    head = new_node;
+}
+
+void insertAtLast(int value)
+{
+    Node *new_node = new Node();
+    new_node->data = value;
+    new_node->next = nullptr;
+    if (head == nullptr)
+    {
+        head = new_node;
+        return;
+    }
+    Node *last = head;
+    while (last->next != nullptr)
+    {
+        last = last->next;
+    }
+    last->next = new_node;
+}
+
+void insertAfter(int prev, int value)
+{
+    Node *current = head;
+    while (current != nullptr && current->data != prev)
+    {
+        current = current->next;
+    }
+    if (current == nullptr)
+    {
+        cout << "Element not found" << endl;
+        return;
+    }
+    Node *new_node = new Node();
+    new_node->data = value;
+    new_node->next = current->next;
+    current->next = new_node;
+}
+
+void delStart()
+{
+    if (head == nullptr)
+    {
+        cout << "List is empty" << endl;
+        return;
+    }
+    else
+    {
+        Node *temp = head;
+        head = head->next;
+        delete temp;
+    }
+}
+
+void delEnd()
+{
+    if (head == nullptr)
+    {
+
+        cout << "List is empty" << endl;
+        return;
+    }
+    else
+    {
+        if (head->next == nullptr)
+        {
+            delete head;
+            head = nullptr;
+        }
+        else
+        {
+            Node *last = head;
+            Node *second_last = nullptr;
+            while (last->next != nullptr)
             {
-                int temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
+                second_last = last;
+                last = last->next;
             }
+            second_last->next = nullptr;
+            delete last;
         }
     }
 }
 
-void selectionSorting(int array[], int n)
+void display()
 {
-    for (int i = 0; i < n; i++)
+    if (head == nullptr)
     {
-        int minIndex = i;
-        for (int j = i + 1; j < n; j++)
-        {
-            if (array[j] < array[minIndex])
-            {
-                minIndex = j;
-            }
-        }
-        if (minIndex != i)
-        {
-            int temp = array[i];
-            array[i] = array[minIndex];
-            array[minIndex] = temp;
-        }
+        cout << "List is empty" << endl;
+        return;
     }
+    Node *ptr = head;
+    while (ptr != nullptr)
+    {
+        cout << ptr->data << " ";
+        ptr = ptr->next;
+    }
+    cout << endl;
 }
 
 int main()
 {
-    int array[5], n = 5;
-    cout << "Enter 5 element in the array to be sorted" << endl;
+    int value, prev, new_value;
+    cout << "Enter 5 element to insert in the list" << endl;
     for (int i = 0; i < 5; i++)
     {
-
-        cin >> array[i];
+        cin >> value;
+        insertAtFirst(value);
+        // insertAtLast(value);
     }
-
-    selectionSorting(array, n);
-    // bubbleSorting(array, n);
     cout << endl;
-    cout << "array after sorting" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << array[i] << " ";
-    }
+    cout << "List after insertion " << endl;
+    display();
+    cout << endl;
+    cout << "Enter the value after which you want to insert a new value" << endl;
+    cin >> prev;
+    cout << endl;
+    cout << "Enter the new value that you want to insert" << endl;
+    cin >> new_value;
+    insertAfter(prev, new_value);
+    cout << endl;
+    cout << "List after insertion" << endl;
+    display();
+    cout << endl;
+    cout << "List after deletion of the first element" << endl;
+    delStart();
+    display();
+    cout << endl;
+    cout << "List after deletion of the last element" << endl;
+    delEnd();
+    display();
     return 0;
 }
