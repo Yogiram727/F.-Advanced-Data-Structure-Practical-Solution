@@ -64,14 +64,20 @@ void display()
     }
     else
     {
-        for (int i = front; i < n; i++)
+        int i = front;
+        do
         {
             cout << queue[i] << " ";
-        }
-        for (int i = 0; i <= rear; i++)
-        {
-            cout << queue[i] << " ";
-        }
+            i = (i + 1) % n;
+        } while ((rear + 1) % n != i);
+        // for (int i = front; i < n; i++)
+        // {
+        //     cout << queue[i] << " ";
+        // }
+        // for (int i = 0; i <= rear; i++)
+        // {
+        //     cout << queue[i] << " ";
+        // }
     }
     cout << endl;
 }
