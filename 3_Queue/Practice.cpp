@@ -1,89 +1,79 @@
 #include <iostream>
 using namespace std;
 
-struct Node
-{
-    int data;
-    Node *next;
-};
-
-Node *front = nullptr;
-Node *rear = nullptr;
+int front = -1, rear = -1, queue[5], n = 5;
 
 void enqueue(int value)
 {
-    Node *new_node = new Node();
-    new_node->data = value;
-    new_node->next = nullptr;
-
-    if (front == nullptr)
+    if ((rear + 1) % n == front)
     {
-        rear = new_node;
-        front = new_node;
-        rear->next = front;
+        cout << "Queue is full" << endl;
+        return;
+    }
+    if (rear == -1)
+    {
+        front = 0;
+        rear = 0;
     }
     else
     {
-        rear->next = new_node;
-        rear = new_node;
-        rear->next = front;
+        rear = (rear + 1) % n;
     }
+    queue[rear] = value;
 }
 
 void dequeue()
 {
-    if (front == nullptr)
+    if (front == -1)
     {
         cout << "Queue is empty" << endl;
         return;
     }
+    if (front == rear)
+    {
+        front = -1;
+        rear = -1;
+    }
     else
     {
-        if (front == rear)
-        {
-            delete front;
-            front = nullptr;
-            rear = nullptr;
-        }
-        else
-        {
-            Node *temp = front;
-            front = front->next;
-            rear->next = front;
-            delete temp;
-        }
+        front = (front + 1) % n;
     }
 }
 
 void display()
 {
-    if (front == nullptr)
+    if (front == -1)
     {
         cout << "Queue is empty" << endl;
         return;
     }
-    else
+
+    int i = front;
+    while (i != rear)
     {
-        Node *ptr = front;
-        do
-        {
-            cout << ptr->data << " ";
-            ptr = ptr->next;
-        } while (ptr != front);
+        cout << queue[i] << " ";
+        i = (i + 1) % n;
     }
+    cout << queue[rear] << endl;
 }
 
 int main()
 {
-    enqueue(1);
-    enqueue(2);
-    enqueue(4);
-    cout << "Queue before deletion" << endl;
+    enqueue(10);
+    enqueue(30);
+    enqueue(40);
+    enqueue(60);
+    cout << "Given element of the queue" << endl;
+    display();
+    cout << "Queue after deletion of partial elements" << endl;
+    dequeue();
+    dequeue();
     display();
     cout << endl;
+    cout << "Queue after deletion of all the element" << endl;
     dequeue();
     dequeue();
-    cout << "Queue after deletion" << endl;
     display();
+    cout << endl;
     return 0;
 }

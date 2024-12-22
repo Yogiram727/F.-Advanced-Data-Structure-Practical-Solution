@@ -19,9 +19,11 @@ int main()
     {
         cin >> array[i];
     }
+
     int x = 54;
     int n = 5;
     int result = search(array, n, x);
+
     if (result == -1)
     {
         cout << "Element not found";

@@ -1,138 +1,78 @@
 #include <iostream>
 using namespace std;
 
-struct Node
-{
-    int data;
-    Node *next;
-};
+int front = -1, rear = -1, queue[5], n = 5;
 
-Node *head = nullptr;
-
-void insertFirst(int value)
+void enqueue(int value)
 {
-    Node *new_node = new Node();
-    new_node->data = value;
-    new_node->next = head;
-    head = new_node;
+    if ((rear + 1) % n == front)
+    {
+        cout << "Queue is full" << endl;
+        return;
+    }
+    if (rear == -1)
+    {
+        front = 0;
+        rear = 0;
+    }
+    else
+    {
+        rear = (rear + 1) % n;
+    }
+    queue[rear] = value;
 }
 
-void insertLast(int value)
+void dequeue()
 {
-    Node *new_node = new Node();
-    new_node->data = value;
-    new_node->next = nullptr;
-    if (head == nullptr)
+    if (front == -1)
     {
-        head = new_node;
+        cout << "Queue is empty" << endl;
         return;
     }
-    Node *last = head;
-    while (last->next != nullptr)
+    if (front == rear)
     {
-        last = last->next;
+        front = -1;
+        rear = -1;
     }
-    last->next = new_node;
-}
-
-void insertAfter(int prev, int new_value)
-{
-    Node *current = head;
-    while (current != nullptr && current->data != prev)
+    else
     {
-        current = current->next;
+        front = (front + 1) % n;
     }
-    if (current == nullptr)
-    {
-        cout << "Given element not found" << "\n";
-        return;
-    }
-    Node *new_node = new Node();
-    new_node->data = new_value;
-    new_node->next = current->next;
-    current->next = new_node;
-}
-
-void delStart()
-{
-    if (head == nullptr)
-    {
-        cout << "List is empty" << endl;
-        return;
-    }
-    Node *temp = head;
-    head = head->next;
-    delete temp;
-}
-
-void delEnd()
-{
-    if (head == nullptr)
-    {
-        cout << "List is empty" << endl;
-        return;
-    }
-    if (head->next == nullptr)
-    {
-        delete head;
-        head = nullptr;
-        return;
-    }
-    Node *last = head;
-    Node *second_last = nullptr;
-    while (last->next != nullptr)
-    {
-        second_last = last;
-        last = last->next;
-    }
-    second_last->next = nullptr;
-    delete last;
 }
 
 void display()
 {
-    if (head == nullptr)
+    if (front == -1)
     {
-        cout << "List is empty" << endl;
+        cout << "Queue is empty" << endl;
         return;
     }
-    Node *ptr = head;
-    while (ptr != nullptr)
+
+    int i = front;
+    while (i != rear)
     {
-        cout << ptr->data << " ";
-        ptr = ptr->next;
+        cout << queue[i] << " ";
+        i = (i + 1) % n;
     }
-    cout << endl;
+    cout << queue[rear] << endl;
 }
 
 int main()
 {
-    int value, prev, new_value;
-    cout << "Enter any 5 element to enter in list" << endl;
-    for (int i = 0; i < 5; i++)
-    {
-        cin >> value;
-        insertFirst(value);
-        // insertLast(value);
-    }
-    cout << endl;
+    enqueue(10);
+    enqueue(30);
+    enqueue(40);
+    enqueue(60);
+    cout << "Given element of the queue" << endl;
+    display();
+    cout << "Queue after deletion of partial elements" << endl;
+    dequeue();
+    dequeue();
     display();
     cout << endl;
-    cout << "Enter after which node you want to insert the new value" << endl;
-    cin >> prev;
-    cout << endl;
-    cout << "Enter the new Value that you want to insert" << endl;
-    cin >> new_value;
-    insertAfter(prev, new_value);
-    cout << endl;
-    cout << "List after insertion" << endl;
-    display();
-    cout << "list after deletion of first element" << endl;
-    delStart();
-    display();
-    cout << endl;
-    cout << "List after deletion of last element" << endl;
-    delEnd();
+    cout << "Queue after deletion of all the element" << endl;
+    dequeue();
+    dequeue();
     display();
     cout << endl;
     return 0;
